@@ -826,6 +826,112 @@
         transition-duration: .01ms !important
       }
     }
+
+
+    /* Final responsive polish: content-sized cards, a safe mobile control dock,
+       and lighter animation work on smaller devices. */
+    #film { height: 100vh; height: 100dvh; min-height: 0; }
+    .scene { height: auto; max-height: calc(100dvh - 150px); }
+    .scene .words { max-height: min(54vh, calc(100dvh - 300px)); }
+
+    @media (max-width: 700px) {
+      #film { min-height: 0; overflow: hidden; }
+      .scene {
+        top: 42%;
+        left: 50%;
+        width: calc(100vw - 28px);
+        height: auto;
+        max-height: calc(100dvh - 160px);
+        padding: 15px 13px;
+        justify-content: center;
+        overflow: hidden;
+        transform: translate(-50%, calc(-50% + 12px)) scale(.99);
+      }
+      .scene.active { transform: translate(-50%, -50%) scale(1); }
+      .scene .number { margin-bottom: 7px; }
+      .scene .rule { margin: 8px auto; }
+      .scene .words {
+        display: block;
+        flex: 0 1 auto;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: calc(100dvh - 300px);
+        margin: 0;
+        padding: 0 6px 10px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+        font-size: clamp(14px, 3.7vw, 17px);
+        line-height: 1.55;
+      }
+      /* Bottom dock is three clear rows; no buttons are clipped by phone edges. */
+      #scene-nav {
+        position: absolute;
+        left: 50%;
+        bottom: 58px;
+        width: max-content;
+        max-width: calc(100vw - 20px);
+        gap: 7px;
+        transform: translateX(-50%);
+        z-index: 18;
+      }
+      #scene-nav button {
+        min-height: 34px;
+        padding: 8px 10px;
+        font-size: 9px;
+        letter-spacing: .04em;
+        white-space: nowrap;
+      }
+      #scene-count { min-width: 42px; font-size: 9px; }
+      #progress {
+        bottom: 46px;
+        width: 38vw;
+        max-width: 180px;
+        height: 2px;
+        z-index: 17;
+      }
+      #controls {
+        right: 9px;
+        bottom: 9px;
+        gap: 5px;
+        z-index: 19;
+      }
+      #controls button, #music {
+        min-height: 32px;
+        padding: 8px 10px;
+        font-size: 9px;
+        letter-spacing: .04em;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+      #music { left: 9px; bottom: 9px; z-index: 19; }
+      #hint { display: none; }
+      /* Avoid expensive full-screen blur and excessive particles on mobile GPUs. */
+      #film:before { filter: none; animation: none; }
+      #film:after { box-shadow: none; }
+      .star, .star.big { box-shadow: none; }
+      .petal { filter: none; }
+      .shooting { display: none; }
+      button { transition: background-color .15s ease; }
+    }
+    @media (max-width: 380px) {
+      #scene-nav { gap: 4px; bottom: 58px; }
+      #scene-nav button { padding: 8px 7px; font-size: 8px; }
+      #scene-count { min-width: 36px; }
+      #progress { width: 32vw; }
+      #controls button, #music { padding: 8px 8px; font-size: 8px; }
+    }
+    @media (max-height: 600px) and (max-width: 700px) {
+      .scene { top: 39%; max-height: calc(100dvh - 135px); }
+      .scene .words { max-height: calc(100dvh - 255px); }
+      #scene-nav { bottom: 53px; }
+      #progress { bottom: 43px; }
+      #controls, #music { bottom: 7px; }
+    }
+
   </style>
 </head>
 
@@ -838,7 +944,7 @@
     <section id="start">
       <div class="start-inner">
         <div style="height:24px"></div>
-        <h1>A little thing for you :),<br><span class="accent">Zemy</span></h1>
+        <h1>A little thing for you :), <br><span class="accent">Zemy</span></h1>
         <div class="rule"></div><button class="start-btn" id="begin">Begin ✦</button>
       </div>
     </section>
@@ -855,7 +961,7 @@
   </div>
   <script>
     const answers = [
-      `I just have something's' to say to you, Look we met on an online app. You were energetic from the start, our vibes matched, you took me as your bestie and I accepted that with my heart open. I liked that energetic and open side of you. You were nice, kind, and honest from the start.`,
+      `I have something's' to say to you, Look... we met on an online app. You were energetic from the start, our vibes matched, you took me as your bestie and I accepted that with my heart open. I liked that energetic and open side of you. You were nice, kind, and honest from the start.`,
       `I love that you accept when you think you're giving me less or putting in less effort, and try to improve where you're lacking. You're brave, you give me time almost every day, and when you can't come to me at the time we usually talk, you feel sorry for that. I can see that you don't intentionally do those things. You're kind and caring, especially caring in the way as I always needed.`,
       `Your caring for me.... you calling me beautiful, nice names, your first message notification at night :)... your talks... you being possessive about me, like I'm not anyone else's except yours.`,
       `I had a rough 6 to 7 months and I was totally drained in those months. Almost every day, I woke up without a smile or a happy face, crying at almost every night... thinking about what I lost... thinking that I didn't actually have anyone outside my parents or family in this world who cared for me or was excited to talk to me and share things with me. You came like a light. You made me think that I don't have to waste my self-respect in front of others just so they start giving me attention. You showed me that there are still good, nice people in this world, I just have to give them a chance, put efforts, and they'll give it back. The biggest change you gave me is that I don't cry at night now. I noticed that now that at some point, I felt sad and empty and had no confidence at all. I still don't have confidence to do things, but you give me enough confidence every time I talk to you, and throughout the next day, to pull over any shit.`,
@@ -870,8 +976,9 @@ I'll keep annoying you and reminding you that you've got a pookie mastikhor to d
     function makeScene(text, i, final = false) {const section = document.createElement('section'); section.className = 'scene'; const n = document.createElement('div'); n.className = 'number'; n.textContent = String(i + 1).padStart(2, '0'); const rule = document.createElement('div'); rule.className = 'rule'; const p = document.createElement('p'); p.className = 'words'; p.textContent = text; section.append(n, rule, p); main.append(section)}
     answers.forEach((a, i) => makeScene(a, i));
     const end = document.createElement('section'); end.className = 'scene'; const title = document.createElement('h1'); title.innerHTML = 'Happy birthday, <span class="accent">Zeemal.</span>'; const line = document.createElement('div'); line.className = 'rule'; const closing = document.createElement('p'); closing.className = 'words'; closing.textContent = 'Just be happy, cutie.... This day is special, but I think every day is special. Every day this world has you is a special day for this world, especially for me.... So you’re on this earth every day, so I guess every day is already a special day for ussss :)'; end.append(title, line, closing); main.append(end);
-    const stars = document.getElementById('stars'); for (let i = 0; i < 190; i++) {const s = document.createElement('i'); s.className = 'star' + (Math.random() > .86 ? ' big' : ''); s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; s.style.setProperty('--d', (2 + Math.random() * 7) + 's'); s.style.animationDelay = (-Math.random() * 7) + 's'; stars.append(s)}
-    for (let i = 0; i < 38; i++) {const p = document.createElement('i'); p.className = 'petal'; p.style.left = Math.random() * 100 + '%'; p.style.setProperty('--fall', (15 + Math.random() * 19) + 's'); p.style.setProperty('--delay', (-Math.random() * 28) + 's'); p.style.setProperty('--drift', (-140 + Math.random() * 280) + 'px'); document.getElementById('film').append(p)}
+    const isMobile = window.matchMedia('(max-width: 700px)').matches;
+    const stars = document.getElementById('stars'); for (let i = 0; i < (isMobile ? 55 : 120); i++) {const s = document.createElement('i'); s.className = 'star' + (Math.random() > .86 ? ' big' : ''); s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; s.style.setProperty('--d', (2 + Math.random() * 7) + 's'); s.style.animationDelay = (-Math.random() * 7) + 's'; stars.append(s)}
+    for (let i = 0; i < (isMobile ? 7 : 20); i++) {const p = document.createElement('i'); p.className = 'petal'; p.style.left = Math.random() * 100 + '%'; p.style.setProperty('--fall', (15 + Math.random() * 19) + 's'); p.style.setProperty('--delay', (-Math.random() * 28) + 's'); p.style.setProperty('--drift', (-140 + Math.random() * 280) + 'px'); document.getElementById('film').append(p)}
     const scenes = [...document.querySelectorAll('.scene')], bar = document.getElementById('bar'), start = document.getElementById('start');
     const durations = answers.map(a => Math.max(9500, Math.min(65000, (a.trim().split(/\s+/).length / 3.0) * 1000 + 4500))).concat([12000]);
     let index = 0, elapsed = 0, last = 0, running = false, raf = 0, total = durations.reduce((a, b) => a + b, 0);
