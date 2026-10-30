@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090817">
+  <title>For Zeemal — A Birthday Film</title>
+  <style>
+    :root {
+      --cream: #fff8f5;
+      --pink: #f5c6df;
+      --rose: #e5a8ca;
+      --gold: #f5dfad;
+      --lav: #d5c7ff;
+      --ink: #090817
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: Georgia, 'Times New Roman', serif
+    }
+
+    body {
+      background: radial-gradient(ellipse at 50% 110%, #55365c 0%, #21182f 43%, #090817 100%)
+    }
+
+    #film {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      min-height: 480px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      isolation: isolate
+    }
+
+    #film:before {
+      content: "";
+      position: absolute;
+      inset: -35%;
+      z-index: -1;
+      background: radial-gradient(ellipse at 18% 32%, #b98be544, transparent 35%), radial-gradient(ellipse at 82% 62%, #e7a9ca35, transparent 33%), radial-gradient(ellipse at 50% 90%, #e5c48c20, transparent 38%);
+      filter: blur(35px);
+      animation: aurora 22s ease-in-out infinite alternate
+    }
+
+    #film:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 42%, #05040c9c 100%);
+      box-shadow: inset 0 0 130px #05040b90
+    }
+
+    @keyframes aurora {
+      to {
+        transform: translate(3%, -4%) scale(1.12)
+      }
+    }
+
+    #stars {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: .45;
+      box-shadow: 0 0 10px 2px #fff9;
+      animation: twinkle var(--d) ease-in-out infinite alternate
+    }
+
+    .star.big {
+      width: 3px;
+      height: 3px;
+      box-shadow: 0 0 18px 5px #f5d9ffbb
+    }
+
+    @keyframes twinkle {
+      to {
+        opacity: 1;
+        transform: scale(2.1)
+      }
+    }
+
+    #moon {
+      position: absolute;
+      top: 8%;
+      right: 12%;
+      width: clamp(58px, 9vw, 112px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff9e8, #f7d9dc 52%, #d7b7e6 100%);
+      box-shadow: 0 0 45px #f7d9e677, 0 0 120px #d9b8f544;
+      opacity: .85;
+      animation: moonfloat 9s ease-in-out infinite alternate
+    }
+
+    @keyframes moonfloat {
+      to {
+        transform: translateY(14px);
+        box-shadow: 0 0 55px #f7d9e699, 0 0 140px #d9b8f566
+      }
+    }
+
+    #glow {
+      position: absolute;
+      width: min(78vw, 850px);
+      height: min(78vw, 850px);
+      border: 1px solid #f6d7ed20;
+      border-radius: 50%;
+      background: radial-gradient(circle, #d9a9e529 0%, #a17bc010 48%, transparent 70%);
+      animation: breathe 8s ease-in-out infinite alternate
+    }
+
+    #glow:before,
+    #glow:after {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border: 1px solid #f6d7ed16;
+      border-radius: 50%;
+      transform: scaleY(.42) rotate(-22deg)
+    }
+
+    #glow:after {
+      transform: scaleY(.42) rotate(22deg)
+    }
+
+    @keyframes breathe {
+      to {
+        transform: scale(1.13);
+        opacity: .7
+      }
+    }
+
+    .petal {
+      position: absolute;
+      top: -10%;
+      width: 10px;
+      height: 17px;
+      border-radius: 90% 10% 90% 10%;
+      background: linear-gradient(145deg, #fff0f6, #c77da8);
+      opacity: 0;
+      animation: fall var(--fall) linear infinite;
+      animation-delay: var(--delay);
+      filter: drop-shadow(0 0 8px #f5b9d577)
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translate3d(0, -5vh, 0) rotate(0);
+        opacity: 0
+      }
+
+      12% {
+        opacity: .65
+      }
+
+      85% {
+        opacity: .48
+      }
+
+      100% {
+        transform: translate3d(var(--drift), 110vh, 0) rotate(620deg);
+        opacity: 0
+      }
+    }
+
+    .shooting {
+      position: absolute;
+      width: 150px;
+      height: 1px;
+      top: 18%;
+      left: -20%;
+      background: linear-gradient(90deg, transparent, #fff, #f4d9ff, transparent);
+      filter: drop-shadow(0 0 6px #fff);
+      transform: rotate(-24deg);
+      animation: shoot 11s ease-in-out infinite;
+      animation-delay: 3s;
+      opacity: 0
+    }
+
+    @keyframes shoot {
+
+      0%,
+      68% {
+        left: -20%;
+        top: 18%;
+        opacity: 0
+      }
+
+      70% {
+        opacity: 1
+      }
+
+      82% {
+        left: 120%;
+        top: 48%;
+        opacity: 0
+      }
+
+      100% {
+        left: 120%;
+        opacity: 0
+      }
+    }
+
+    .scene {
+      position: absolute;
+      z-index: 3;
+      width: min(1080px, 91vw);
+      max-height: 82vh;
+      text-align: center;
+      padding: clamp(22px, 4vw, 52px);
+      opacity: 0;
+      transform: translateY(28px) scale(.975);
+      transition: opacity .75s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center
+    }
+
+    .scene:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid #f4d9ed28;
+      border-radius: 8px;
+      pointer-events: none;
+      box-shadow: 0 0 60px #d7a9f00b, inset 0 0 50px #f4d9ed08
+    }
+
+    .scene.active {
+      opacity: 1;
+      transform: translateY(0) scale(1)
+    }
+
+    .scene .number {
+      font: 10px Arial, sans-serif;
+      letter-spacing: .55em;
+      color: #eacfe2;
+      margin-bottom: clamp(16px, 3vh, 30px);
+      opacity: .78
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: clamp(46px, 8vw, 100px);
+      line-height: 1.05;
+      letter-spacing: -.045em;
+      margin: 0 auto 22px;
+      text-shadow: 0 0 42px #e5b3df55
+    }
+
+    .accent {
+      color: var(--pink);
+      font-style: italic;
+      text-shadow: 0 0 30px #f5c6df66
+    }
+
+    .rule {
+      width: 86px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: clamp(16px, 3vh, 28px) auto;
+      position: relative;
+      flex: none
+    }
+
+    .rule:after {
+      content: "✧";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -52%);
+      padding: 0 9px;
+      background: #21182f;
+      color: var(--gold);
+      font-size: 13px
+    }
+
+    .words {
+      font-size: clamp(16px, 1.55vw, 21px);
+      line-height: 1.85;
+      color: #fff4f7;
+      white-space: pre-wrap;
+      text-align: center;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 0 12px 8px;
+      text-shadow: 0 1px 16px #090817;
+      scrollbar-width: thin;
+      scrollbar-color: #d5b3d966 transparent
+    }
+
+    .words::-webkit-scrollbar {
+      width: 4px
+    }
+
+    .words::-webkit-scrollbar-thumb {
+      background: #d5b3d966;
+      border-radius: 9px
+    }
+
+    #start {
+      position: absolute;
+      z-index: 20;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(ellipse at 50% 45%, #493052 0%, #171126 45%, #090817 82%);
+      transition: opacity 1.2s ease
+    }
+
+    .start-inner {
+      text-align: center;
+      padding: 25px;
+      max-width: 760px;
+      animation: appear 2s ease both
+    }
+
+    .start-inner h1 {
+      font-size: clamp(54px, 9vw, 108px)
+    }
+
+    .start-inner .sub {
+      font-size: clamp(15px, 2vw, 20px);
+      letter-spacing: .18em;
+      color: #ead9e9;
+      text-transform: uppercase
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(18px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    #music {
+      position: absolute;
+      z-index: 15;
+      left: 26px;
+      bottom: 38px
+    }
+
+    #progress {
+      position: absolute;
+      z-index: 12;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(320px, 42vw);
+      height: 2px;
+      background: #ffffff25;
+      border-radius: 5px;
+      overflow: hidden
+    }
+
+    #bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #c9b6ff, #f5c6df, #f5dfad);
+      box-shadow: 0 0 14px #eac5f5;
+      transition: width .15s linear
+    }
+
+    #controls {
+      position: absolute;
+      z-index: 15;
+      bottom: 38px;
+      right: 26px;
+      display: flex;
+      gap: 8px
+    }
+
+    button {
+      border: 1px solid #ffffff50;
+      background: #ffffff12;
+      color: #fff8f2;
+      border-radius: 30px;
+      padding: 11px 16px;
+      font: 10px Arial, sans-serif;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      backdrop-filter: blur(12px)
+    }
+
+    button:hover {
+      background: #ffffff25;
+      border-color: #ffffff99
+    }
+
+    .start-btn {
+      margin-top: 36px;
+      padding: 16px 30px;
+      border-color: #e9c7dbbb;
+      letter-spacing: .2em;
+      background: #ffffff18
+    }
+
+    #hint {
+      position: absolute;
+      z-index: 11;
+      bottom: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      font: 9px Arial, sans-serif;
+      letter-spacing: .18em;
+      color: #e8d8e788;
+      text-transform: uppercase;
+      white-space: nowrap
+    }
+
+    @media(max-width:700px) {
+      .scene {
+        width: 94vw;
+        max-height: 79vh;
+        padding: 20px 17px
+      }
+
+      .words {
+        font-size: clamp(14px, 3.7vw, 17px);
+        line-height: 1.72;
+        padding: 0 4px
+      }
+
+      .scene .number {
+        margin-bottom: 12px
+      }
+
+      #controls {
+        right: 9px;
+        bottom: 36px
+      }
+
+      #music {
+        left: 9px;
+        bottom: 36px
+      }
+
+      #progress {
+        bottom: 20px;
+        width: 34vw
+      }
+
+      #moon {
+        right: 7%;
+        top: 6%
+      }
+
+      #hint {
+        display: none
+      }
+    }
+
+    @media(max-height:650px) {
+      .scene {
+        max-height: 76vh;
+        padding: 14px 22px
+      }
+
+      .words {
+        font-size: clamp(14px, 1.4vw, 18px);
+        line-height: 1.55
+      }
+
+      .scene .number {
+        margin-bottom: 8px
+      }
+
+      .rule {
+        margin: 12px auto
+      }
+    }
+
+    /* Responsive layout fix: reserve space for the bottom controls and keep long text scrollable. */
+    .scene {
+      left: 50%;
+      top: calc((100% - 82px)/2);
+      bottom: auto;
+      width: min(1080px, calc(100vw - 32px));
+      height: auto;
+      max-height: calc(100vh - 104px);
+      min-height: 0;
+      padding: clamp(16px, 3vw, 38px);
+      transform: translate(-50%, calc(-50% + 22px)) scale(.985);
+      overflow: hidden;
+    }
+
+    .scene.active {
+      transform: translate(-50%, -50%) scale(1)
+    }
+
+    .scene .number {
+      flex: none;
+      margin-bottom: clamp(8px, 1.6vh, 18px)
+    }
+
+    .scene .rule {
+      flex: none;
+      margin: clamp(9px, 1.7vh, 18px) auto
+    }
+
+    .scene .words {
+      flex: 0 1 auto;
+      min-height: 0;
+      max-height: calc(100vh - 245px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 0 14px 16px;
+      overflow-wrap: anywhere;
+      scrollbar-gutter: stable;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #controls {
+      right: 14px;
+      bottom: 12px;
+      gap: 6px
+    }
+
+    #music {
+      left: 14px;
+      bottom: 12px
+    }
+
+    #progress {
+      bottom: 6px
+    }
+
+    #hint {
+      bottom: 2px
+    }
+
+    button {
+      padding: 10px 13px
+    }
+
+    @media(max-width:700px) {
+      .scene {
+        width: calc(100vw - 20px);
+        max-height: calc(100dvh - 96px);
+        padding: 15px 13px;
+        top: calc((100% - 78px)/2)
+      }
+
+      .scene .number {
+        font-size: 9px;
+        letter-spacing: .35em;
+        margin-bottom: 8px
+      }
+
+      .scene .rule {
+        margin: 8px auto
+      }
+
+      .scene .words {
+        font-size: clamp(14px, 3.8vw, 17px);
+        line-height: 1.58;
+        max-height: calc(100dvh - 220px);
+        padding: 0 7px 14px
+      }
+
+      h1 {
+        font-size: clamp(34px, 8vw, 58px);
+        line-height: 1.08;
+        margin-bottom: 10px
+      }
+
+      #controls {
+        right: 8px;
+        bottom: 10px;
+        gap: 5px
+      }
+
+      #music {
+        left: 8px;
+        bottom: 10px
+      }
+
+      button {
+        font-size: 9px;
+        padding: 9px 10px;
+        letter-spacing: .08em
+      }
+
+      #progress {
+        width: 28vw;
+        bottom: 4px
+      }
+
+      #hint {
+        display: none
+      }
+    }
+
+    @media(max-height:560px) {
+      .scene {
+        max-height: calc(100vh - 84px);
+        padding: 10px 16px
+      }
+
+      .scene .number {
+        margin-bottom: 5px
+      }
+
+      .scene .rule {
+        margin: 5px auto
+      }
+
+      .scene .words {
+        font-size: clamp(13px, 1.7vw, 16px);
+        line-height: 1.42;
+        max-height: calc(100vh - 180px);
+        padding-bottom: 12px
+      }
+
+      #controls,
+      #music {
+        bottom: 8px
+      }
+    }
+
+    /* Readability pass: reduce bloom/glare and increase text contrast. */
+    .words {
+      color: #fffafc;
+      text-shadow: 0 1px 2px #080610;
+      font-weight: 400;
+      -webkit-text-stroke: 0;
+    }
+
+    h1 {
+      text-shadow: 0 2px 5px #080610;
+    }
+
+    .accent {
+      color: #ffd9eb;
+      text-shadow: 0 1px 4px #090817;
+    }
+
+    .scene:before {
+      box-shadow: inset 0 0 22px #09081712;
+    }
+
+    #film:after {
+      background: radial-gradient(ellipse at center, transparent 58%, #05040c70 100%);
+      box-shadow: inset 0 0 65px #05040b55;
+    }
+
+    .star {
+      box-shadow: 0 0 3px 1px #ffffff55;
+    }
+
+    .star.big {
+      box-shadow: 0 0 6px 2px #f5d9ff66;
+    }
+
+    #moon {
+      box-shadow: 0 0 24px #f7d9e644, 0 0 55px #d9b8f522;
+    }
+
+    #scene-nav {
+      position: absolute;
+      z-index: 16;
+      left: 50%;
+      bottom: 38px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      white-space: nowrap
+    }
+
+    #scene-nav button {
+      padding: 10px 14px;
+      min-height: 38px
+    }
+
+    #scene-count {
+      font: 10px Arial, sans-serif;
+      letter-spacing: .12em;
+      color: #f4e7f1;
+      min-width: 48px;
+      text-align: center
+    }
+
+    #scene-nav button:disabled {
+      opacity: .35;
+      cursor: not-allowed
+    }
+
+    @media(max-width:700px) {
+      #scene-nav {
+        bottom: 48px;
+        gap: 6px
+      }
+
+      #scene-nav button {
+        padding: 9px 11px;
+        font-size: 9px;
+        min-height: 36px
+      }
+
+      #scene-count {
+        font-size: 9px;
+        min-width: 42px
+      }
+
+      #progress {
+        bottom: 4px;
+        width: 36vw
+      }
+
+      #controls {
+        bottom: 8px
+      }
+
+      #music {
+        bottom: 8px
+      }
+    }
+
+    @media(max-height:560px) {
+      #scene-nav {
+        bottom: 34px
+      }
+
+      #scene-nav button {
+        min-height: 30px;
+        padding: 6px 9px
+      }
+
+      #controls,
+      #music {
+        bottom: 6px
+      }
+    }
+
+    /* Fix: allow interaction with the active scene so long text (especially scene 8) scrolls. */
+    .scene.active {
+      pointer-events: auto;
+    }
+
+    .scene .words {
+      pointer-events: auto;
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+    }
+
+
+    /* Reliable mobile layout: the active scene is bounded, and its words are the scroll area. */
+    @media (max-width: 700px) {
+      .scene {
+        left: 50%;
+        top: 46%;
+        bottom: auto;
+        width: calc(100vw - 20px);
+        height: calc(100dvh - 170px);
+        max-height: calc(100dvh - 170px);
+        min-height: 0;
+        padding: 15px 13px;
+        overflow: hidden;
+        justify-content: flex-start;
+        transform: translate(-50%, calc(-50% + 22px)) scale(.985);
+      }
+      .scene.active { transform: translate(-50%, -50%) scale(1); }
+      .scene .number, .scene .rule { flex: 0 0 auto; }
+      .scene .words {
+        display: block;
+        flex: 1 1 auto;
+        min-height: 0;
+        height: auto;
+        max-height: none;
+        width: 100%;
+        margin: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 7px 24px;
+        scrollbar-width: thin;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *:before,
+      *:after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="film">
+    <div id="stars"></div>
+    <div id="moon"></div>
+    <div id="glow"></div>
+    <div class="shooting"></div>
+    <section id="start">
+      <div class="start-inner">
+        <div style="height:24px"></div>
+        <h1>A little thing for you :),<br><span class="accent">Zemy</span></h1>
+        <div class="rule"></div><button class="start-btn" id="begin">Begin ✦</button>
+      </div>
+    </section>
+    <main id="scenes"></main>
+    <button id="music">♫ Music on</button>
+    <div id="progress">
+      <div id="bar"></div>
+    </div>
+    <div id="scene-nav" aria-label="Birthday film navigation"><button id="previous" aria-label="Previous scene">←
+        Previous</button><span id="scene-count" aria-live="polite">01 / 09</span><button id="next"
+        aria-label="Next scene">Next →</button></div>
+    <div id="controls"><button id="pause">Pause</button><button id="restart">Replay</button></div>
+    <div id="hint">Its little long heheh :) · Take your time</div>
+  </div>
+  <script>
+    const answers = [
+      `I just have something's' to say to you, Look we met on an online app. You were energetic from the start, our vibes matched, you took me as your bestie and I accepted that with my heart open. I liked that energetic and open side of you. You were nice, kind, and honest from the start.`,
+      `I love that you accept when you think you're giving me less or putting in less effort, and try to improve where you're lacking. You're brave, you give me time almost every day, and when you can't come to me at the time we usually talk, you feel sorry for that. I can see that you don't intentionally do those things. You're kind and caring, especially caring in the way as I always needed.`,
+      `Your caring for me.... you calling me beautiful, nice names, your first message notification at night :)... your talks... you being possessive about me, like I'm not anyone else's except yours.`,
+      `I had a rough 6 to 7 months and I was totally drained in those months. Almost every day, I woke up without a smile or a happy face, crying at almost every night... thinking about what I lost... thinking that I didn't actually have anyone outside my parents or family in this world who cared for me or was excited to talk to me and share things with me. You came like a light. You made me think that I don't have to waste my self-respect in front of others just so they start giving me attention. You showed me that there are still good, nice people in this world, I just have to give them a chance, put efforts, and they'll give it back. The biggest change you gave me is that I don't cry at night now. I noticed that now that at some point, I felt sad and empty and had no confidence at all. I still don't have confidence to do things, but you give me enough confidence every time I talk to you, and throughout the next day, to pull over any shit.`,
+      `We haven't had much time together yet, but there was a moment when I was sick and you cared for me like my mother does, asking me to do this and that, take this medicine, go there and do this... I got emotional at that time, thinking, “Moeez, don't lose her, man... put everything you have into this friendship.” We'll face difficulties, but promise not only not to lose her, but to fight for her for this friendship and have patience.`,
+      `When you ask me about my day, I tell you, and you start saying, “Chill, don't overthink,” and start saying funny, cute things about the people who made my day bad... you look so cute, and right there I feel better, like my day isn't ending badly after all.`,
+      `You're brave, you're kind, and you deserve love, this world, and everything you want to be and want to have. You can fight, you can stop everyone from hurting you. You're pretty, and not just pretty you're like a moon, beautiful and charming, so much that the moon gets jealous of you.`,
+      `Zemy, I just want you to know that you've changed me so much. Even though we haven't had much time together yet, you've already changed me so much, and you're still doing it. I'll let you do this in the future, because you're making me stronger, more confident, more mature, and happier. I don't know what I'd be without you if we hadn't met, but I definitely know I'd be in the worst place of my life, because I was losing myself. You're precious to me.... precious in a way that makes me feel I can have that one person who cares about me, that I'm important too, and that I don't have to disrespect myself in front of others to get attention so people start caring about me. Almost every day when I come to you, I forget all the challenges and bad things I faced throughout the day. Forgetting them makes my day good, with a happy ending, and that happy ending makes me excited and happy to come to you again if I'm having a bad time. And it's not just me coming to you every time. I learn from you and from my life, so I can be that happy-ending giver for you too. You don't have to be strong all the time. You can cry; you need someone, and you can come to me. I'll fucking make sure this minion stays here for you every time you need him. And even if I can't some days or sometimes, because life is unpredictable, I'll try to come back to you, cause pagluuuu, I'm not leaving you.
+
+I'll keep annoying you and reminding you that you've got a pookie mastikhor to deal with every day.... :)....`
+    ];
+    const main = document.getElementById('scenes');
+    function makeScene(text, i, final = false) {const section = document.createElement('section'); section.className = 'scene'; const n = document.createElement('div'); n.className = 'number'; n.textContent = String(i + 1).padStart(2, '0'); const rule = document.createElement('div'); rule.className = 'rule'; const p = document.createElement('p'); p.className = 'words'; p.textContent = text; section.append(n, rule, p); main.append(section)}
+    answers.forEach((a, i) => makeScene(a, i));
+    const end = document.createElement('section'); end.className = 'scene'; const title = document.createElement('h1'); title.innerHTML = 'Happy birthday, <span class="accent">Zeemal.</span>'; const line = document.createElement('div'); line.className = 'rule'; const closing = document.createElement('p'); closing.className = 'words'; closing.textContent = 'Just be happy, cutie.... This day is special, but I think every day is special. Every day this world has you is a special day for this world, especially for me.... So you’re on this earth every day, so I guess every day is already a special day for ussss :)'; end.append(title, line, closing); main.append(end);
+    const stars = document.getElementById('stars'); for (let i = 0; i < 190; i++) {const s = document.createElement('i'); s.className = 'star' + (Math.random() > .86 ? ' big' : ''); s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; s.style.setProperty('--d', (2 + Math.random() * 7) + 's'); s.style.animationDelay = (-Math.random() * 7) + 's'; stars.append(s)}
+    for (let i = 0; i < 38; i++) {const p = document.createElement('i'); p.className = 'petal'; p.style.left = Math.random() * 100 + '%'; p.style.setProperty('--fall', (15 + Math.random() * 19) + 's'); p.style.setProperty('--delay', (-Math.random() * 28) + 's'); p.style.setProperty('--drift', (-140 + Math.random() * 280) + 'px'); document.getElementById('film').append(p)}
+    const scenes = [...document.querySelectorAll('.scene')], bar = document.getElementById('bar'), start = document.getElementById('start');
+    const durations = answers.map(a => Math.max(9500, Math.min(65000, (a.trim().split(/\s+/).length / 3.0) * 1000 + 4500))).concat([12000]);
+    let index = 0, elapsed = 0, last = 0, running = false, raf = 0, total = durations.reduce((a, b) => a + b, 0);
+    function updateNavigation() {
+      document.getElementById('previous').disabled = index <= 0;
+      document.getElementById('next').disabled = index >= scenes.length - 1;
+      document.getElementById('scene-count').textContent = String(index + 1).padStart(2, '0') + ' / ' + String(scenes.length).padStart(2, '0');
+    }
+    function show(i) {index = Math.max(0, Math.min(scenes.length - 1, i)); scenes.forEach((s, n) => {s.classList.toggle('active', n === index); if (n === index) {const w = s.querySelector('.words'); if (w) w.scrollTop = 0} }); updateNavigation()}
+    function jumpTo(i) {
+      if (start.style.display !== 'none') return;
+      index = Math.max(0, Math.min(scenes.length - 1, i));
+      elapsed = durations.slice(0, index).reduce((a, b) => a + b, 0);
+      last = 0; show(index); bar.style.width = Math.min(100, elapsed / total * 100) + '%';
+      if (index === scenes.length - 1) {running = false; cancelAnimationFrame(raf); document.getElementById('pause').textContent = 'Play'; bar.style.width = '100%';}
+      else if (running) {cancelAnimationFrame(raf); raf = requestAnimationFrame(tick);}
+    }
+    function tick(t) {if (!running) return; if (!last) last = t; elapsed += t - last; last = t; let sum = 0; for (let i = 0; i < durations.length; i++) {sum += durations[i]; if (elapsed < sum) {if (index !== i) {index = i; show(index)} break} if (i === durations.length - 1) {running = false; bar.style.width = '100%'; document.getElementById('pause').textContent = 'Play'; return } } bar.style.width = Math.min(100, elapsed / total * 100) + '%'; raf = requestAnimationFrame(tick)}
+    let audioCtx = null, musicOn = true, musicTimer = null, noteIndex = 0; const notes = [261.63, 329.63, 392, 493.88, 392, 329.63, 293.66, 349.23, 440, 523.25, 440, 349.23];
+    function pianoNote(freq, when) {if (!audioCtx || !musicOn) return; const gain = audioCtx.createGain(), osc = audioCtx.createOscillator(), harm = audioCtx.createOscillator(); osc.type = 'sine'; harm.type = 'triangle'; osc.frequency.setValueAtTime(freq, when); harm.frequency.setValueAtTime(freq * 2, when); const mix = audioCtx.createGain(); mix.gain.setValueAtTime(.0001, when); mix.gain.exponentialRampToValueAtTime(.035, when + .035); mix.gain.exponentialRampToValueAtTime(.0001, when + 2.7); gain.gain.value = .52; osc.connect(gain); harm.connect(gain); gain.connect(mix); mix.connect(audioCtx.destination); osc.start(when); harm.start(when); osc.stop(when + 2.8); harm.stop(when + 2.8)}
+    function startMusic() {if (!musicOn) return; try {if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended') audioCtx.resume(); if (musicTimer) return; musicTimer = setInterval(() => {if (musicOn && audioCtx) {pianoNote(notes[noteIndex % notes.length], audioCtx.currentTime); if (noteIndex % 3 === 0) pianoNote(notes[(noteIndex + 3) % notes.length] / 2, audioCtx.currentTime + .02); noteIndex++} }, 680)} catch (e) {document.getElementById('music').textContent = '♫ unavailable'} }
+    function stopMusic() {if (musicTimer) {clearInterval(musicTimer); musicTimer = null} }
+    document.getElementById('music').addEventListener('click', () => {musicOn = !musicOn; document.getElementById('music').textContent = musicOn ? '♫ Music on' : '♫ Music off'; if (musicOn) startMusic(); else stopMusic()});
+    function begin() {startMusic(); start.style.opacity = '0'; setTimeout(() => start.style.display = 'none', 700); index = 0; elapsed = 0; last = 0; running = true; show(0); document.getElementById('pause').textContent = 'Pause'; cancelAnimationFrame(raf); raf = requestAnimationFrame(tick)}
+    document.getElementById('begin').addEventListener('click', begin);
+    document.getElementById('previous').addEventListener('click', () => jumpTo(index - 1));
+    document.getElementById('next').addEventListener('click', () => jumpTo(index + 1));
+    updateNavigation();
+    document.getElementById('pause').addEventListener('click', () => {if (start.style.display !== 'none') return; running = !running; last = 0; document.getElementById('pause').textContent = running ? 'Pause' : 'Play'; if (running) {startMusic(); raf = requestAnimationFrame(tick)} else cancelAnimationFrame(raf)});
+    document.getElementById('restart').addEventListener('click', () => {start.style.display = 'none'; start.style.opacity = '0'; begin()});
+
+    // Touch fallback for mobile browsers that fail to scroll a nested element inside the film.
+    let touchY = 0, touchScrollTop = 0, touchWords = null;
+    document.getElementById('scenes').addEventListener('touchstart', (event) => {
+      const target = event.target.closest('.words');
+      if (!target || !target.closest('.scene.active')) { touchWords = null; return; }
+      touchWords = target;
+      touchY = event.touches[0].clientY;
+      touchScrollTop = target.scrollTop;
+    }, { passive: true });
+    document.getElementById('scenes').addEventListener('touchmove', (event) => {
+      if (!touchWords || !touchWords.closest('.scene.active')) return;
+      const deltaY = event.touches[0].clientY - touchY;
+      const maxScroll = touchWords.scrollHeight - touchWords.clientHeight;
+      if (maxScroll > 1) {
+        event.preventDefault();
+        touchWords.scrollTop = touchScrollTop - deltaY;
+      }
+    }, { passive: false });
+    document.getElementById('scenes').addEventListener('touchend', () => { touchWords = null; }, { passive: true });
+    document.getElementById('scenes').addEventListener('touchcancel', () => { touchWords = null; }, { passive: true });
+  </script>
+</body>
+
+</html>
